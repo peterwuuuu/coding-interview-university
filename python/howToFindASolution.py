@@ -16,6 +16,40 @@ nums = [1,2,3,4,5]
 n = 3
 
 result = Task1(nums, n)        
-
 print(result)
     
+
+
+    
+    
+def Task2(heights):
+    row_len = len(heights)
+    col_len = len(heights[0])
+    shortest_heights = []
+    highest_heights = []
+
+    # 高效写法
+    shortest_heights = [min(row) for row in heights]
+    
+    # 我的写法
+    # for row in range(row_len):
+    #     min_rows = min(heights[row])
+    #     shortest_heights.append(min_rows) 
+    
+    for col in range(col_len):
+        max_cols = max(row[col] for row in heights)
+        highest_heights.append(max_cols)
+    
+    max_shortest = max(shortest_heights)
+    min_highest = min(highest_heights)        
+    
+    return max_shortest, min_highest
+
+heights = [
+    [179, 170, 180],
+    [165, 178, 185],
+    [175, 181, 187]
+]
+
+result = Task2(heights)
+print( result)
