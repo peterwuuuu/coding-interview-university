@@ -9,7 +9,7 @@
 # or return -1 if this is not possible.
 
 from collections import deque
-
+from itertools import product
 
 # def generate_forbidden_words(constraints):
 #     forbidden = set()
@@ -61,13 +61,20 @@ from collections import deque
 
 
 def generate_constraints(constraints):
+    # 灵活
     forbiddens = set()
-    for i in constraints[0]:
-        for j in constraints[1]:
-            for k in constraints[2]:
-                for l in constraints[3]:
-                    forbiddens.add(i+j+k+l)
+    for combination in product(*constraints):
+        forbiddens_word = ''.join(combination)
+        forbiddens.add(forbiddens_word)
     return forbiddens
+    
+    # 写死
+    # for i in constraints[0]:
+    #     for j in constraints[1]:
+    #         for k in constraints[2]:
+    #             for l in constraints[3]:
+    #                 forbiddens.add(i+j+k+l)
+    # return forbiddens
 
 def get_neighbors(current_word):
     neighbor = []
@@ -81,6 +88,7 @@ def get_neighbors(current_word):
 
 def Task3(start, finish, constraints):
     forbiddens = generate_constraints(constraints)
+    print(forbiddens)
     
     if start in forbiddens or finish in forbiddens:
         return -1
